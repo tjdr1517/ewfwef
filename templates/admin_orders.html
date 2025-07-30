@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}관리자 - 주문 현황{% endblock %}
+
+{% block content %}
+<h1>주문 현황</h1>
+<table border="1">
+    <thead>
+        <tr>
+            <th>주문 ID</th>
+            <th>테이블</th>
+            <th>주문 시간</th>
+            <th>총 금액</th>
+            <th>상태</th>
+            <th>상태 변경</th>
+        </tr>
+    </thead>
+    <tbody id="orders-table-body">
+        {% for order in orders %}
+        <tr id="order-{{ order.id }}">
+            <td>{{ order.id }}</td>
+            <td>{{ order.table_number }}</td>
+            <td>{{ order.created_at }}</td>
+            <td>{{ order.total_price }}원</td>
+            <td class="status">{{ order.status }}</td>
+            <td>
+                <select class="status-changer" data-order-id="{{ order.id }}">
+                    <option value="접수" {% if order.status == '접수' %}selected{% endif %}>접수</option>
+                    <option value="조리 중" {% if order.status == '조리 중' %}selected{% endif %}>조리 중</option>
+                    <option value="완료" {% if order.status == '완료' %}selected{% endif %}>완료</option>
+                </select>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+{% endblock %}

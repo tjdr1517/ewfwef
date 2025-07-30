@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}장바구니{% endblock %}
+
+{% block content %}
+<h1>장바구니</h1>
+<div id="cart-items"></div>
+<p>총 주문 금액: <span id="total-price">0</span>원</p>
+<a href="/checkout">주문하기</a>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}관리자 - 메뉴 관리{% endblock %}
+
+{% block content %}
+<h1>메뉴 및 재고 관리</h1>
+
+<h2>새 메뉴 추가</h2>
+<form action="{{ url_for('admin_menu') }}" method="post">
+    <input type="text" name="name" placeholder="메뉴 이름" required>
+    <input type="number" name="price" placeholder="가격" required>
+    <input type="number" name="stock" placeholder="재고" required>
+    <button type="submit">추가</button>
+</form>
+
+<hr>
+
+<h2>기존 메뉴 수정</h2>
+<table>
+    <thead>
+        <tr>
+            <th>이름</th>
+            <th>가격</th>
+            <th>재고</th>
+            <th>저장</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in menu_items %}
+        <tr>
+            <form action="{{ url_for('update_menu_item', menu_id=item.id) }}" method="post">
+                <td><input type="text" name="name" value="{{ item.name }}"></td>
+                <td><input type="number" name="price" value="{{ item.price }}"></td>
+                <td><input type="number" name="stock" value="{{ item.stock }}"></td>
+                <td><button type="submit">저장</button></td>
+            </form>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}메뉴{% endblock %}
+
+{% block content %}
+<h1>메뉴</h1>
+<div class="menu-container">
+    {% for item in menu_items %}
+    <div class="menu-item" data-id="{{ item.id }}" data-name="{{ item.name }}" data-price="{{ item.price }}">
+        <img src="{{ item.image_url or url_for('static', filename='images/default.png') }}" alt="{{ item.name }}">
+        <h2>{{ item.name }}</h2>
+        <p>{{ item.price }}원</p>
+        <button class="add-to-cart-btn">장바구니에 담기</button>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
